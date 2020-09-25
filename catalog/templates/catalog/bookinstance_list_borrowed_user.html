@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Instance Borrowed By User</title>
+</head>
+<body>
+    {% extends "base_generic.html" %}
+
+    {% block content %}
+    <div style="margin-left:20px;margin-top:30px">
+        <h1>Borrowed books</h1>
+
+        {% if bookinstance_list %}
+        <ul>
+            {% for bookinst in bookinstance_list %}
+                <li class="{% if bookinst.is_overdue %}text-danger{% endif %}">
+                    <a href="{% url 'book-detail' bookinst.book.pk %}">{{bookinst.book.title}}</a> ({{ bookinst.due_back }})
+                </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p>There are no books borrowed by you.</p>
+        {% endif %}
+    {% endblock %}
+    </div>
+</body>
+</html>

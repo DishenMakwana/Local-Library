@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Author Confirm Delete</title>
+</head>
+<body>
+    {% extends "base_generic.html" %}
+
+    {% block content %}
+    <div style="margin-left:20px;margin-top:30px">
+    <br>
+    <h1>Delete Author</h1>
+    <br>
+    <p>Are you sure you want to delete the author: {{ author }}?</p>
+    <br><br>
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Yes, delete.">
+        </form>
+
+    {% endblock %}
+    </div>
+</body>
+</html>
