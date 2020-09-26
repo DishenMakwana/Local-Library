@@ -26,10 +26,10 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'u$0blzt-cup(w16f31x!+^j$mg$m8z
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
-#DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
-DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
+#DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
-ALLOWED_HOSTS = ['https://sheltered-ocean-30487.herokuapp.com/','127.0.0.1']  ##
+ALLOWED_HOSTS = ['.herokuapp.com','127.0.0.1']  ##
 
 
 # Application definition
