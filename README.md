@@ -1,5 +1,8 @@
 # view this website on heroku 
-  - https://sheltered-ocean-30487.herokuapp.com/
+  - https://local-library-dm.herokuapp.com/
+  
+  -user id : Demo
+  -password : demo1234
 
 # Local-Library
 Local Library website written in Django
