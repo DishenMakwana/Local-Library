@@ -1,8 +1,7 @@
 # view this website on heroku 
   - https://local-library-dm.herokuapp.com/
-  
-  -user id : Demo
-  -password : demo1234
+  * user id : Demo
+  * password : demo1234
 
 # Local-Library
 Local Library website written in Django
