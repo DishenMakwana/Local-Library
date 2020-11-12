@@ -179,3 +179,23 @@ class BookDelete(PermissionRequiredMixin, DeleteView):
     model = Book
     success_url = reverse_lazy('books')
     permission_required = 'catalog.can_mark_returned'
+
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import logout, authenticate, login
+from django.shortcuts import render, redirect
+
+def register(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            username = form.cleaned_data.get('username')
+            login(request, user)
+            return redirect("calalog:index")
+        else:
+            for msg in form.error_messages:
+                print(form.error_messages[msg])
+            return render(request = request,template_name = "catalog/register.html",context={"form":form})
+            
+    form = UserCreationForm
+    return render(request = request,template_name = "catalog/register.html",context={"form":form})
