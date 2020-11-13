@@ -1,28 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Book Instance Borrowed By All</title>
-</head>
-<body>
-    {% extends "base_generic.html" %}
+{% extends "base_generic.html" %}
+{% block title %}
+Book Instance Borrowed By All
+{% endblock title %}
 
-    {% block content %}
-    <div style="margin-left:20px;margin-top:30px">
-        <h1>All Borrowed Books</h1>
+{% block content %}
+<div style="margin-left:20px;margin-top:30px">
+    <h1>All Borrowed Books</h1>
 
-        {% if bookinstance_list %}
-        <ul>
-            {% for bookinst in bookinstance_list %}
-                <li class="{% if bookinst.is_overdue %}text-danger{% endif %}">
-                    <a href="{% url 'book-detail' bookinst.book.pk %}">{{bookinst.book.title}}</a> ({{ bookinst.due_back }}) {% if user.is_staff %}- {{ bookinst.borrower }}{% endif %} {% if perms.catalog.can_mark_returned %}- <a href="{% url 'renew-book-librarian' bookinst.id %}">Renew</a>  {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
-        {% else %}
-            <p>There are no books borrowed.</p>
-        {% endif %}
-    {% endblock %}
-    </div>
-</body>
-</html>
+    {% if bookinstance_list %}
+    <ul>
+        {% for bookinst in bookinstance_list %}
+        <li class="{% if bookinst.is_overdue %}text-danger{% endif %}">
+            <a href="{% url 'book-detail' bookinst.book.pk %}">{{bookinst.book.title}}</a> ({{ bookinst.due_back }}) {% if user.is_staff %}- {{ bookinst.borrower }}{% endif %} {% if perms.catalog.can_mark_returned %}- <a href="{% url 'renew-book-librarian' bookinst.id %}">Renew</a> {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>There are no books borrowed.</p>
+    {% endif %}
+</div>
+{% endblock %}

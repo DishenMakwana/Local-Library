@@ -8,7 +8,7 @@ from django import forms
 class RenewBookForm(forms.Form):
     """Form for a librarian to renew books."""
     renewal_date = forms.DateField(
-            help_text="Enter a date between now and 4 weeks (default 3).")
+        help_text="Enter a date between now and 4 weeks (default 3).")
 
     def clean_renewal_date(self):
         data = self.cleaned_data['renewal_date']
@@ -23,3 +23,27 @@ class RenewBookForm(forms.Form):
 
         # Remember to always return the cleaned data.
         return data
+
+
+from django.contrib.auth.forms import UserCreationForm
+from django import forms
+from django.contrib.auth.models import User
+
+
+class RegisterForm(UserCreationForm):
+    email = forms.EmailField(label="Email")
+    firstname = forms.CharField(label="First name")
+    lastname = forms.CharField(label="Last name")
+
+    class Meta:
+        model = User
+        fields = ("username", "email", "firstname", "lastname")
+
+    def save(self, commit=True):
+        user = super(RegisterForm, self).save(commit=False)
+        user.firstname = self.cleaned_data["firstname"]
+        user.lastname = self.cleaned_data["lastname"]
+        user.email = self.cleaned_data["email"]
+        if commit:
+            user.save()
+        return user

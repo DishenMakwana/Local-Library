@@ -1,25 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Log In</title>
-</head>
-<body>
-    {% extends "base_generic.html" %}
+{% extends "base_generic.html" %}
+{% block title %}
+Log-In
+{% endblock title %}
 
-    {% block content %}
-    <div style="margin-left:20px;margin-top:30px">
+{% block content %}
+<div style="margin-left:20px;margin-top:30px">
     {% if form.errors %}
     <p>Your username and password didn't match. Please try again.</p>
     {% endif %}
 
     {% if next %}
-        {% if user.is_authenticated %}
-            <p>Your account doesn't have access to this page. To proceed,please login with an account that has access.</p>
-        {% else %}
-        <p><h3>Please login to see this page.</h3></p>
-        <br>
-        {% endif %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,please login with an account that has access.</p>
+    {% else %}
+    <p>
+    <h3>Please login to see this page.</h3></p>
+    <br>
+    {% endif %}
     {% endif %}
 
     <form method="post" action="{% url 'login' %}"> {% csrf_token %}
@@ -38,9 +35,9 @@
         <input type="hidden" name="next" value="{{ next }}"/>
     </form>
     <br>
+    <br>
     {# Assumes you setup the password_reset view in your URLconf #}
     <p><a href="{% url 'password_reset' %}">Forgot password?</a></p>
-    </div>
-    {% endblock %}
-</body>
-</html>
+    <p><a href="{% url 'register' %}">New User, Please Register Here</a></p>
+</div>
+{% endblock %}

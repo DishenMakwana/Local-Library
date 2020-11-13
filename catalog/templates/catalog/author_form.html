@@ -1,27 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Author Form</title>
-</head>
-<body>
-    {% extends "base_generic.html" %}
+{% extends "base_generic.html" %}
+{% block title %}
+Author Form
+{% endblock title %}
 
-    {% block content %}
-    <div style="margin-left:20px;margin-top:30px">
+{% block content %}
+<div style="margin-left:20px;margin-top:30px">
     <br>
     <h1>New Author Details : </h1>
     <br>
 
-        <form action="" method="post">
+    <form action="" method="post">
         {% csrf_token %}
         <table>
             {{ form.as_table }}
         </table>
-            <br>
+        <br>
         <input type="submit" value="Submit">
-        </form>
-    {% endblock %}
-    </div>
-</body>
-</html>
+    </form>
+</div>
+{% endblock %}

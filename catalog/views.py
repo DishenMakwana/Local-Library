@@ -5,6 +5,7 @@ from django.shortcuts import render
 from .models import Book, Author, BookInstance, Genre
 from django.shortcuts import get_object_or_404
 
+
 def index(request):
     """View function for home page of site."""
     # Generate counts of some of the main objects
@@ -16,7 +17,7 @@ def index(request):
 
     # Number of visits to this view, as counted in the session variable.
     num_visits = request.session.get('num_visits', 0)
-    request.session['num_visits'] = num_visits+1
+    request.session['num_visits'] = num_visits + 1
 
     # Render the HTML template index.html with the data in the context variable.
     return render(
@@ -39,6 +40,7 @@ class BookListView(generic.ListView):
     def get_queryset(self):
         return Book.objects.filter(title__icontains='war')[:5]  # Get 5 books containing the title war
     '''
+
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get the context
         context = super(BookListView, self).get_context_data(**kwargs)
@@ -102,7 +104,7 @@ import datetime
 from django.contrib.auth.decorators import permission_required
 
 # from .forms import RenewBookForm
-from catalog.forms import RenewBookForm
+from catalog.forms import RenewBookForm, RegisterForm
 
 
 @permission_required('catalog.can_mark_returned')
@@ -180,13 +182,15 @@ class BookDelete(PermissionRequiredMixin, DeleteView):
     success_url = reverse_lazy('books')
     permission_required = 'catalog.can_mark_returned'
 
+
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import logout, authenticate, login
 from django.shortcuts import render, redirect
 
+
 def register(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
             username = form.cleaned_data.get('username')
@@ -195,7 +199,7 @@ def register(request):
         else:
             for msg in form.error_messages:
                 print(form.error_messages[msg])
-            return render(request = request,template_name = "catalog/register.html",context={"form":form})
-            
-    form = UserCreationForm
-    return render(request = request,template_name = "catalog/register.html",context={"form":form})
+            return render(request=request, template_name="catalog/register.html", context={"form": form})
+
+    form = RegisterForm
+    return render(request=request, template_name="catalog/register.html", context={"form": form})

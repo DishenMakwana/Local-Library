@@ -1,22 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration</title>
-</head>
-<body>
-    {% extends "base_generic.html" %}
+{% extends "base_generic.html" %}
+{% block title %}
+Registration Form
+{% endblock title %}
 
-    {% block content %}
-        <form method="POST">
-            {% csrf_token %}
-            {{form.as_p}}
-            <br>
-            <button style="background-color:blue; color:white" class="btn btn-outline-info" type="submit">Sign Up</button>
-        </form>
+{% block content %}
+<div style="margin-left:20px;margin-top:50px">
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
         <br>
-        If you already have an account <a href="{% url 'login' %}" target="blank"><strong>login</strong></a> instead.
-    {% endblock %}
-</body>
-</html>
+        <button style="background-color:blue; color:white" class="btn btn-outline-info" type="submit">Sign Up</button>
+    </form>
+    <br>
+    If you already have an account <a href="{% url 'login' %}" target="blank"><strong>login</strong></a> instead.
+</div>
+{% endblock %}
