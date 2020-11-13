@@ -9,7 +9,7 @@ Registration Form
         {% csrf_token %}
         {{form.as_p}}
         <br>
-        <button style="background-color:blue; color:white" class="btn btn-outline-info" type="submit">Sign Up</button>
+        <button class="btn btn-outline-info" type="submit">Sign Up</button>
     </form>
     <br>
     If you already have an account <a href="{% url 'login' %}" target="blank"><strong>login</strong></a> instead.
