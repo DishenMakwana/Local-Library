@@ -1,7 +1,8 @@
+from django.core.mail import send_mail
 from django.shortcuts import render
 
 # Create your views here.
-
+from locallibrary import settings
 from .models import Book, Author, BookInstance, Genre
 from django.shortcuts import get_object_or_404
 
@@ -195,6 +196,13 @@ def register(request):
             user = form.save()
             username = form.cleaned_data.get('username')
             login(request, user)
+
+            subject = 'Welcome to LocalLibrary-DM World'
+            message = 'Hi {}, thank you for registering in LocalLibrary. Your can now explore our website and do the book renew.'.format(username)
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [user.email, ]
+            send_mail(subject, message, email_from, recipient_list)
+
             return redirect("index")
         else:
             for msg in form.error_messages:
