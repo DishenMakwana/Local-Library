@@ -198,7 +198,7 @@ def register(request):
             login(request, user)
 
             subject = 'Welcome to LocalLibrary-DM World'
-            message = 'Hi {}, thank you for registering in LocalLibrary. Your can now explore our website and do the book renew.'.format(username)
+            message = 'Hi {}, thank you for registering in LocalLibrary. Your can now explore our website and do the book renew. \n\n https://local-library-dm.herokuapp.com/'.format(username)
             email_from = settings.EMAIL_HOST_USER
             recipient_list = [user.email, ]
             send_mail(subject, message, email_from, recipient_list)

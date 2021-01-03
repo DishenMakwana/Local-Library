@@ -40,8 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'catalog'
+    'catalog',
+    'gmailapi_backend',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -133,10 +136,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
 EMAIL_HOST_USER = 'demo.django.dd@gmail.com'
 DEFAULT_FROM_EMAIL = 'demo.django.dd@gmail.com'
 SERVER_EMAIL = 'demo.django.dd@gmail.com'
@@ -147,3 +150,10 @@ import dj_database_url
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
+
+EMAIL_BACKEND = 'gmailapi_backend.mail.GmailBackend'
+
+GMAIL_API_CLIENT_ID = '20177494541-8fvv19nj1bmbra7ijf4o3nkf4vufdbm0.apps.googleusercontent.com'
+GMAIL_API_CLIENT_SECRET = 'OzUdx81C2HaUUdXyUpLTp7Qv'
+GMAIL_API_REFRESH_TOKEN = '1//0g1QCMh9-M3NBCgYIARAAGBASNwF-L9IrduJ3YIqOx0fOd9Gt9sfPKSQwAB9irAIcOqokzWGKESkYN69ukATyJzPyuKKESBkEe6c'
+GMAIL_API_ACCESS_TOKEN = 'ya29.a0AfH6SMB6nySOFvgFCgz5T-bYaHrstlleUZpzyQZcV30Mce0VYB9w9iKNkBJ5_Mul-RN0Uyar5BWKBWExguJwh50VvfKhgMjdLFSPhCgXotMdpXa-S96zvsTO-rzhHzjmIPFQllTdPGdOhQKvXPW22mwUypn7ZOIkoIZhvEdlpMA'
