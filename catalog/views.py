@@ -195,7 +195,8 @@ def register(request):
         if form.is_valid():
             user = form.save()
             username = form.cleaned_data.get('username')
-            login(request, user)
+            email = form.cleaned_data.get('email')
+            login(request, user, email)
 
             subject = 'Welcome to LocalLibrary-DM World'
             message = 'Hi {}, thank you for registering in LocalLibrary. Your can now explore our website and do the book renew. \n\n https://local-library-dm.herokuapp.com/'.format(username)
